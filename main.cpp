@@ -10,7 +10,13 @@ int main()
 	
 	std::cout << myList << std::endl;
 
-	myList.insert(8, 3);
+	myList.insertAfter(8, 0);
+
+	std::cout << myList << std::endl;
+
+	myList.removeAfter(3);
+	myList.remove();
+	myList.remove();
 
 	std::cout << myList << std::endl;
 }

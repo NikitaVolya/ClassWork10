@@ -25,6 +25,7 @@ public:
 	void appfirst(const T& value);
 	void append(const T& value);
 	void insert(const T& value, int index);
+
 	void remove();
 
 	size_t getSize() const { return size; };
@@ -106,22 +107,20 @@ inline void LinkedList<T>::insert(const T& value, int index)
 	if (index == 0)
 	{
 		appfirst(value);
-		return;
 	}
-	if (index == size)
+	else if (index == size)
 	{
 		append(value);
-		return;
 	}
-
-	Node<T>* pointer = head;
-	while (index-- > 1)
-		pointer = pointer->next;
-
-	Node<T>* newNode = new Node<T>{ value, pointer->next };
-	size++;
-
-	pointer->next = newNode;
+	else
+	{
+		Node<T>* pointer = head;
+		while (index-- > 1)
+			pointer = pointer->next;
+		Node<T>* newNode = new Node<T>{ value, pointer->next };
+		pointer->next = newNode;
+		size++;
+	}
 }
 
 template<typename T>

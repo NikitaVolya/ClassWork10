@@ -10,7 +10,7 @@ int main()
 	
 	std::cout << myList << std::endl;
 
-	myList.insert(8, 4);
+	myList.insert(8, 3);
 
 	std::cout << myList << std::endl;
 }

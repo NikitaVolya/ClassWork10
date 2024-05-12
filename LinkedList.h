@@ -22,7 +22,9 @@ public:
 
 	T* find(const T& value);
 
-	void addfirst(T value);
+	void appfirst(const T& value);
+	void append(const T& value);
+	void insert(const T& value, int index);
 	void remove();
 
 	size_t getSize() const { return size; };
@@ -49,7 +51,7 @@ template<typename T>
 inline LinkedList<T>::LinkedList(const std::initializer_list<T>& elements) : LinkedList()
 {
 	for (const T* element = elements.end() - 1; element != elements.begin() - 1; element--)
-		addfirst(*element);
+		appfirst(*element);
 }
 
 template<typename T>
@@ -78,10 +80,48 @@ inline T* LinkedList<T>::find(const T& value)
 }
 
 template<typename T>
-void LinkedList<T>::addfirst(T value)
+void LinkedList<T>::appfirst(const T& value)
 {
 	head = new Node<T>{ value, head };
 	size++;
+}
+
+template<typename T>
+inline void LinkedList<T>::append(const T& value)
+{
+	Node<T>* pointer = head;
+	while (pointer->next)
+		pointer = pointer->next;
+
+	pointer->next = new Node<T>{ value, nullptr };
+	size++;
+}
+
+template<typename T>
+inline void LinkedList<T>::insert(const T& value, int index)
+{
+	if (index < 0 || index > size)
+		throw std::out_of_range("Invalid index");
+
+	if (index == 0)
+	{
+		appfirst(value);
+		return;
+	}
+	if (index == size)
+	{
+		append(value);
+		return;
+	}
+
+	Node<T>* pointer = head;
+	while (index-- > 1)
+		pointer = pointer->next;
+
+	Node<T>* newNode = new Node<T>{ value, pointer->next };
+	size++;
+
+	pointer->next = newNode;
 }
 
 template<typename T>

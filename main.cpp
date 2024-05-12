@@ -10,14 +10,9 @@ int main()
 	
 	std::cout << myList << std::endl;
 
-	int* val = myList.find(4);
-	*val = 2;
-
-	myList.remove();
+	myList.insert(8, 4);
 
 	std::cout << myList << std::endl;
-
-	std::cout << (myList.find(11) == nullptr ? "is nullptr" : "is not nullptr");
 }
 
 

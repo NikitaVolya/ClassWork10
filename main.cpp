@@ -8,15 +8,16 @@ int main()
 {
 	LinkedList<int> myList {5, 4, 2, 10};
 	
-	for (int i = 0; i < myList.getSize(); i++)
-		std::cout << myList[i] << ", ";
+	std::cout << myList << std::endl;
 
-	std::cout << std::endl;
+	int* val = myList.find(4);
+	*val = 2;
 
 	myList.remove();
 
-	for (int i = 0; i < myList.getSize(); i++)
-		std::cout << myList[i] << ", ";
+	std::cout << myList << std::endl;
+
+	std::cout << (myList.find(11) == nullptr ? "is nullptr" : "is not nullptr");
 }
 
 

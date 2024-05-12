@@ -20,6 +20,8 @@ public:
 	LinkedList(const std::initializer_list<T>& elements);
 	~LinkedList();
 
+	T* find(const T& value);
+
 	void addfirst(T value);
 	void remove();
 
@@ -28,6 +30,19 @@ public:
 	T& getElement(int index) const;
 	T& operator[](int);
 	const T& operator[](int) const;
+
+	friend std::ostream& operator<<(std::ostream& out, const LinkedList& lst)
+	{
+		out << "[ ";
+		for (int i = 0; i < lst.getSize(); i++)
+		{
+			out << lst[i];
+			if (i < lst.getSize() - 1)
+				out << ", ";
+		}
+		out << " ]";
+		return out;
+	}
 };
 
 template<typename T>
@@ -47,6 +62,19 @@ LinkedList<T>::~LinkedList()
 		delete pointer;
 		pointer = tmp;
 	}
+}
+
+template<typename T>
+inline T* LinkedList<T>::find(const T& value)
+{
+	Node<T>* tmp = head;
+	while (tmp)
+	{
+		if (tmp->value == value)
+			return &tmp->value;
+		tmp = tmp->next;
+	}
+	return nullptr;
 }
 
 template<typename T>

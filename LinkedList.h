@@ -34,16 +34,10 @@ public:
 	T& operator[](int);
 	const T& operator[](int) const;
 
+	void print(std::ostream& out) const;
 	friend std::ostream& operator<<(std::ostream& out, const LinkedList& lst)
 	{
-		out << "[ ";
-		for (int i = 0; i < lst.getSize(); i++)
-		{
-			out << lst[i];
-			if (i < lst.getSize() - 1)
-				out << ", ";
-		}
-		out << " ]";
+		lst.print(out);
 		return out;
 	}
 };
@@ -158,4 +152,19 @@ template<typename T>
 inline const T& LinkedList<T>::operator[](int index) const
 {
 	return getElement(index);
+}
+
+template<typename T>
+inline void LinkedList<T>::print(std::ostream& out) const
+{
+	out << "[ ";
+	Node<T>* tmp = head;
+	while (tmp)
+	{
+		out << tmp->value;
+		if (tmp->next)
+			out << ", ";
+		tmp = tmp->next;
+	}
+	out << " ]";
 }
